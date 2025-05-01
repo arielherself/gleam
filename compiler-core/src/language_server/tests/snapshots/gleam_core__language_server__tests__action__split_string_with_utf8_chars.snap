@@ -1,0 +1,17 @@
+---
+source: compiler-core/src/language_server/tests/action.rs
+expression: "\npub fn main() {\n    let _hello = \"Hello! 😊\"\n}\n"
+---
+----- BEFORE ACTION
+
+pub fn main() {
+    let _hello = "Hello! 😊"
+                      ↑    
+}
+
+
+----- AFTER ACTION
+
+pub fn main() {
+    let _hello = "Hell" <> todo <> "o! 😊"
+}

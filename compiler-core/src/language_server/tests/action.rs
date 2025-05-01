@@ -369,6 +369,19 @@ fn split_string() {
 }
 
 #[test]
+fn split_string_with_utf8_chars() {
+    assert_code_action!(
+        INTERPOLATE_STRING,
+        "
+pub fn main() {
+    let _hello = \"Hello! 😊\"
+}
+",
+        find_position_of("o!").to_selection(),
+    );
+}
+
+#[test]
 fn no_split_string_right_at_the_start() {
     assert_no_code_actions!(
         INTERPOLATE_STRING,
